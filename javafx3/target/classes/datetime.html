@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            font-family: sans-serif;
+        }
+
+        #datetime_zone, #show_datetime {
+            display: block;
+            margin-bottom: 10px;
+            min-width: 200px;
+            width: 50%;
+            max-width: 400px;
+            font-size: 16px;
+        }
+
+        #show_datetime {
+            padding: 10px 16px;
+            background-color: violet;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <select id="datetime_zone">
+      <option value="Asia/Tokyo">Tokyo, Japan</option>
+      <option value="America/Los_Angeles">Los Angeles, US</option>
+      <option value="Asia/Yakutsk">Yakutsk, Russia</option>
+      <option value="Pacific/Auckland">Auckland, New Zealand</option>
+    </select>
+    <button id="show_datetime">Show date and time</button>
+    <p id="output_datetime">You need to select date and time you wish to show.</p>
+    <script>
+        const datetime_zone = document.querySelector("#datetime_zone")
+        const show_datetime = document.querySelector("#show_datetime")
+        const output_datetime = document.querySelector("#output_datetime")
+
+        show_datetime.addEventListener("click", () => {
+            const xhr = new XMLHttpRequest()
+
+            xhr.open("GET", "http://127.0.0.1:7070?timezone=" + datetime_zone.value)
+            xhr.send()
+            xhr.addEventListener("load", () => {
+                if(xhr.readyState == 4 && xhr.status == 200) {
+                   output_datetime.innerHTML = xhr.responseText
+                }
+            })
+        })
+
+
+    </script>
+</body>
+</html>
