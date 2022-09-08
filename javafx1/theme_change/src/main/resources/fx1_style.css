@@ -1,0 +1,10 @@
+.toggle {
+    -fx-background-color: #424242;
+}
+
+.enabled:disabled {
+	-fx-background-color: green;
+}
+.disabled:disabled {
+	-fx-background-color: darkgrey;
+}
